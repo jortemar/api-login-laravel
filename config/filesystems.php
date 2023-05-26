@@ -33,6 +33,8 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            'visibility' => 'public',
+
             'throw' => false,
         ],
 
@@ -56,6 +58,13 @@ return [
             'throw' => false,
         ],
 
+        'avatars' => [
+            'driver' => 'local',
+            'root' => storage_path('app/user-avatars'),
+            'url' => env('APP_URL').'/fotos-de-usuarios',
+            'visibility' => 'public',
+        ]
+
     ],
 
     /*
@@ -71,6 +80,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('fotos-de-usuarios') => storage_path('app/user-avatars'),
     ],
 
 ];

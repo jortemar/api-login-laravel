@@ -31,11 +31,19 @@ Route::post('auth/login', [AuthController::class, 'login']);
 // Después definimos un grupo de rutas que están protegidas por el middleware de autenticación 'auth:sanctum',
 // asegurando que las rutas solo sean accesibles para usuarios autenticados con un token válido
 Route::middleware(['auth:sanctum'])->group(function() {
+    Route::get('auth/users', [AuthController::class, 'index']); // igual no hay que poner el auth delante del update en el argumento del método put
+    Route::get('auth/user/{id}', [AuthController::class, 'getUser']); // le pasamos el id como parámetro en la url, en lugar de en la request
+
+    Route::put('auth/update', [AuthController::class, 'update']);
+    Route::put('auth/updatepassword', [AuthController::class, 'updatePassword']);
+    Route::post('auth/updatephoto', [AuthController::class, 'updatePhoto']);
+    Route::post('auth/deletephoto', [AuthController::class, 'deletePhoto']);
+
     Route::resource('/departments', DepartmentController::class);
     Route::resource('/employees', EmployeeController::class);
     Route::get('/employeesall', [EmployeeController::class, 'all']);
-    Route::get('/employeesbydepartment', [EmployeeController::class, 'EmployeesByDepartment']);
-    
+    Route::get('/employeesbydepartment', [EmployeeController::class, 'employeesByDepartment']);
+
     // Finalmente definimos una ruta de logout que elimina el token de autenticación del usuario
     Route::get('auth/logout', [AuthController::class, 'logout']);
 });

@@ -31,7 +31,7 @@ class DepartmentController extends Controller
         $department->save();
         return response()->json([
             'status' => true,
-            'message' => 'Departmento creado satisfactoriamente'
+            'message' => 'Departamento creado satisfactoriamente'
         ], 200);
     }
 

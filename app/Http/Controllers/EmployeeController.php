@@ -95,7 +95,7 @@ class EmployeeController extends Controller
     // toma el leftJoin, usando como referencia el count(employees.id). Indicándole el right la referencia para mostrar resultados serán los departamentos
 
     // cuenta los empleados por id, y te da sus detalles y también el nombre del departamento. Se agrupan por departamento
-    public function EmployeesByDepartment() {
+    public function employeesByDepartment() {
         $employees = Employee::select(DB::raw('count(employees.id) as count, departments.name'))
         ->rightJoin('departments', 'departments.id', '=', 'employees.department_id') //igualamos las primary y foreign key de las dos tablas
         ->groupBy('departments.name')->get();
