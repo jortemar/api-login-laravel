@@ -223,7 +223,8 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:100',
             'newEmail' => 'required|string|email|max:100',
             'address' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:20'
+            'phone' => 'nullable|string|max:20',
+            'is_admin' => 'boolean'
         ];
         $validator = \Validator::make($request->input(), $rules);
         if ($validator->fails()) {
@@ -241,20 +242,12 @@ class AuthController extends Controller
             ], 404);
         }
 
-        // $email = $request->input('email');
-        // $newEmail = $request->input('newEmail');
-
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
-        // if ($request->input('newEmail') !== null) {
-        //     $user->email = $request->input('newEmail');
-        // }
-        // if (!empty($request->input('newEmail'))) {
-        //     $user->email = $request->input('newEmail');
-        // }
         $user->email = $request->input('newEmail');
         $user->address = $request->input('address');
         $user->phone = $request->input('phone');
+        $user->is_admin = $request->input('is_admin');
 
         $user->save();
 
@@ -264,7 +257,6 @@ class AuthController extends Controller
             'data' => $user,
         ], 200);
     }
-
 
     // cerramos sesión eliminando todos los tokens de acceso asociados a la cuenta del usuario
     public function logout() {
