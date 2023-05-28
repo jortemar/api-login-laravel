@@ -247,7 +247,9 @@ class AuthController extends Controller
         $user->email = $request->input('newEmail');
         $user->address = $request->input('address');
         $user->phone = $request->input('phone');
-        $user->is_admin = $request->input('is_admin');
+        // if ($request->input('is_admin')) {
+            $user->is_admin = $request->input('is_admin');
+        // }
 
         $user->save();
 
